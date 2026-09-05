@@ -12,7 +12,7 @@ description: >
 FlowMesh builds and runs multi-step AI agent pipelines. Define workflows visually or via API, then trigger them on demand, schedule, or webhook.
 
 **Dashboard:** https://flowmesh.nexuslayer.eu  
-**API base:** https://flowmesh.nexuslayer.eu/api/v1  
+**API base:** https://api.flowmesh.nexuslayer.eu/api/v1  
 **Auth:** `Authorization: Bearer {{NEXUSLAYER_TOKEN}}`
 
 ---
@@ -20,13 +20,13 @@ FlowMesh builds and runs multi-step AI agent pipelines. Define workflows visuall
 ## List Pipelines
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  https://flowmesh.nexuslayer.eu/api/v1/pipelines | python3 -m json.tool
+  https://api.flowmesh.nexuslayer.eu/api/v1/pipelines | python3 -m json.tool
 ```
 
 ## Get Pipeline Details
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  https://flowmesh.nexuslayer.eu/api/v1/pipelines/PIPELINE_ID | python3 -m json.tool
+  https://api.flowmesh.nexuslayer.eu/api/v1/pipelines/PIPELINE_ID | python3 -m json.tool
 ```
 
 ## Trigger a Pipeline
@@ -35,19 +35,19 @@ curl -s -X POST \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
   -H "Content-Type: application/json" \
   -d '{"payload": {"input": "your data here"}}' \
-  https://flowmesh.nexuslayer.eu/api/v1/pipelines/PIPELINE_ID/execute | python3 -m json.tool
+  https://api.flowmesh.nexuslayer.eu/api/v1/pipelines/PIPELINE_ID/execute | python3 -m json.tool
 ```
 
 ## Check Execution Status
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  https://flowmesh.nexuslayer.eu/api/v1/executions/EXECUTION_ID | python3 -m json.tool
+  https://api.flowmesh.nexuslayer.eu/api/v1/executions/EXECUTION_ID | python3 -m json.tool
 ```
 
 ## List Recent Executions
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  https://flowmesh.nexuslayer.eu/api/v1/executions | python3 -m json.tool
+  https://api.flowmesh.nexuslayer.eu/api/v1/executions | python3 -m json.tool
 ```
 
 ## Create a Pipeline (API)
@@ -61,7 +61,7 @@ curl -s -X POST \
     "nodes": [],
     "edges": []
   }' \
-  https://flowmesh.nexuslayer.eu/api/v1/pipelines | python3 -m json.tool
+  https://api.flowmesh.nexuslayer.eu/api/v1/pipelines | python3 -m json.tool
 ```
 
 ---

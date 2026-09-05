@@ -12,7 +12,7 @@ description: >
 VaultBrain stores notes, findings, and documents with semantic search. Tag everything with `AINotes` for agent accessibility.
 
 **Dashboard:** https://notes.nexuslayer.eu  
-**API base:** https://notes.nexuslayer.eu/v1  
+**API base:** https://api.brainvault.nexuslayer.eu/v1  
 **Auth:** NexusLayer SSO JWT (see below)
 
 ---
@@ -50,7 +50,7 @@ body = json.dumps({
     "tags": ["AINotes", "project-name", "topic"]
 }).encode()
 req = urllib.request.Request(
-    "https://notes.nexuslayer.eu/v1/notes",
+    "https://api.brainvault.nexuslayer.eu/v1/notes",
     data=body,
     headers={"Content-Type": "application/json", "Authorization": f"Bearer {TOKEN}"},
     method="POST"
@@ -65,17 +65,17 @@ with urllib.request.urlopen(req, timeout=10) as resp:
 ## Search Notes
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  "https://notes.nexuslayer.eu/v1/notes?search=keyword&tag=AINotes" | python3 -m json.tool
+  "https://api.brainvault.nexuslayer.eu/v1/notes?search=keyword&tag=AINotes" | python3 -m json.tool
 ```
 
 ## List All Notes
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  https://notes.nexuslayer.eu/v1/notes | python3 -m json.tool
+  https://api.brainvault.nexuslayer.eu/v1/notes | python3 -m json.tool
 ```
 
 ## Get a Note by ID
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  https://notes.nexuslayer.eu/v1/notes/NOTE_ID | python3 -m json.tool
+  https://api.brainvault.nexuslayer.eu/v1/notes/NOTE_ID | python3 -m json.tool
 ```

@@ -32,7 +32,7 @@ curl -s -X POST \
   -H "Content-Type: application/json" \
   -d '{
     "name": "web-01",
-    "hostname": "192.168.1.100",
+    "hostname": "10.0.0.10",
     "port": 22,
     "osType": "LINUX",
     "connectionType": "SSH_KEY",
@@ -64,17 +64,17 @@ curl -s -X POST \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
   -H "Content-Type: application/json" \
   -d '{"targetNodeIds": ["NODE_UUID_1", "NODE_UUID_2"]}' \
-  https://forgeops.nexuslayer.eu/api/v1/forges/FORGE_ID/run | python3 -m json.tool
+  https://forgeops.nexuslayer.eu/api/v1/forges/FORGE_ID/runs | python3 -m json.tool
 ```
 
 ---
 
 ## Runs
 
-### List Runs
+### List Runs (for one forge)
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  https://forgeops.nexuslayer.eu/api/v1/runs | python3 -m json.tool
+  https://forgeops.nexuslayer.eu/api/v1/forges/FORGE_ID/runs | python3 -m json.tool
 ```
 
 ### Get Run Output
@@ -90,7 +90,7 @@ curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
 ### List Drift Reports
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  https://forgeops.nexuslayer.eu/api/v1/drift | python3 -m json.tool
+  https://forgeops.nexuslayer.eu/api/v1/forges/FORGE_ID/drift | python3 -m json.tool
 ```
 
 ---
@@ -118,3 +118,27 @@ curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
 ```
 https://forgeops.nexuslayer.eu?sso_token={{NEXUSLAYER_TOKEN}}
 ```
+
+---
+
+## Endpoint reference (verified against production)
+
+| Method | Path |
+|---|---|
+| GET | `/api/v1/health` |
+| GET/POST | `/api/v1/nodes` · `/api/v1/nodes/{id}` · `POST /api/v1/nodes/{id}/ping` |
+| GET/POST | `/api/v1/groups` · `/api/v1/groups/{id}/members` · `/api/v1/groups/{id}/variables` |
+| GET/POST | `/api/v1/forges` · `/api/v1/forges/{id}` · `/api/v1/forges/{id}/versions` |
+| POST | `/api/v1/forges/{id}/validate` · `/api/v1/forges/{id}/bindings` |
+| GET/POST | `/api/v1/forges/{forgeId}/runs` — list and start runs for a forge |
+| GET | `/api/v1/runs/{runId}` · `/api/v1/runs/{runId}/tasks` · `/api/v1/runs/{runId}/logs` |
+| POST | `/api/v1/runs/{runId}/cancel` |
+| GET | `/api/v1/forges/{forgeId}/drift` · `POST /api/v1/forges/{forgeId}/drift/check` |
+| GET/POST | `/api/v1/vault/secrets` · `GET /api/v1/vault/secrets/{id}/reveal` |
+| GET | `/api/v1/audit/events` — ADMIN or OPERATOR role only |
+
+There is **no** top-level `/api/v1/runs` or `/api/v1/drift`; both are nested under a
+forge. `/api/v1/users` and `/api/v1/audit/events` require an elevated role and return
+403 for a standard account.
+
+**Problems?** Email admin@nexuslayer.eu.
