@@ -10,7 +10,7 @@ description: >
 # WikiLLM — Documents to a Living Knowledge Base
 
 **Dashboard:** https://wikillm.nexuslayer.eu
-**API base:** https://wikillm.nexuslayer.eu/api/v1
+**API base:** https://api.wikillm.nexuslayer.eu/api/v1
 **Auth:** `Authorization: Bearer {{NEXUSLAYER_TOKEN}}`
 
 WikiLLM ingests PDF, DOCX, XLSX, CSV and Markdown, runs them through a multi-stage LLM
@@ -22,17 +22,17 @@ pipeline, and publishes a searchable wiki that updates when the source files cha
 
 ```bash
 # list
-curl https://wikillm.nexuslayer.eu/api/v1/projects \
+curl https://api.wikillm.nexuslayer.eu/api/v1/projects \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}"
 
 # create
-curl -X POST https://wikillm.nexuslayer.eu/api/v1/projects \
+curl -X POST https://api.wikillm.nexuslayer.eu/api/v1/projects \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
   -H "Content-Type: application/json" \
   -d '{"name":"platform-docs"}'
 
 # force a full rebuild
-curl -X POST https://wikillm.nexuslayer.eu/api/v1/projects/{id}/rebuild \
+curl -X POST https://api.wikillm.nexuslayer.eu/api/v1/projects/{id}/rebuild \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}"
 ```
 
@@ -40,12 +40,12 @@ curl -X POST https://wikillm.nexuslayer.eu/api/v1/projects/{id}/rebuild \
 
 ```bash
 # upload source documents
-curl -X POST https://wikillm.nexuslayer.eu/api/v1/projects/{id}/files \
+curl -X POST https://api.wikillm.nexuslayer.eu/api/v1/projects/{id}/files \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
   -F "file=@./spec.pdf"
 
 # processing status per file
-curl "https://wikillm.nexuslayer.eu/api/v1/projects/{id}/files?status=pending" \
+curl "https://api.wikillm.nexuslayer.eu/api/v1/projects/{id}/files?status=pending" \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}"
 ```
 
@@ -53,15 +53,15 @@ curl "https://wikillm.nexuslayer.eu/api/v1/projects/{id}/files?status=pending" \
 
 ```bash
 # generated pages
-curl https://wikillm.nexuslayer.eu/api/v1/projects/{id}/pages \
+curl https://api.wikillm.nexuslayer.eu/api/v1/projects/{id}/pages \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}"
 
 # one page — format=md|html|json
-curl "https://wikillm.nexuslayer.eu/api/v1/projects/{id}/pages/{pageId}?format=md" \
+curl "https://api.wikillm.nexuslayer.eu/api/v1/projects/{id}/pages/{pageId}?format=md" \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}"
 
 # semantic search across the wiki
-curl -X POST https://wikillm.nexuslayer.eu/api/v1/projects/{id}/search \
+curl -X POST https://api.wikillm.nexuslayer.eu/api/v1/projects/{id}/search \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
   -H "Content-Type: application/json" \
   -d '{"query":"how does failover work"}'
@@ -70,7 +70,7 @@ curl -X POST https://wikillm.nexuslayer.eu/api/v1/projects/{id}/search \
 ## RAG query (the agent entry point)
 
 ```bash
-curl -X POST https://wikillm.nexuslayer.eu/api/v1/projects/{id}/rag \
+curl -X POST https://api.wikillm.nexuslayer.eu/api/v1/projects/{id}/rag \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
   -H "Content-Type: application/json" \
   -d '{"question":"what is the retention policy?"}'
@@ -83,7 +83,7 @@ source pages cited, which is what you want to ground a response on.
 ## Pipeline status
 
 ```bash
-curl https://wikillm.nexuslayer.eu/api/v1/projects/{id}/pipeline \
+curl https://api.wikillm.nexuslayer.eu/api/v1/projects/{id}/pipeline \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}"
 # files_by_status, progress_pct, active_jobs, eta_seconds
 ```

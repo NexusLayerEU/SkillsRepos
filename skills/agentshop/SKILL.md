@@ -11,7 +11,7 @@ description: >
 # AgentShop — Coding Agent Platform
 
 **Dashboard:** https://agentshop.nexuslayer.eu
-**API base:** https://agentshop.nexuslayer.eu/api
+**API base:** https://api.agentshop.nexuslayer.eu/api
 **Auth:** `Authorization: Bearer {{NEXUSLAYER_TOKEN}}`
 
 ---
@@ -20,7 +20,7 @@ description: >
 
 ```bash
 # what specialists are available
-curl https://agentshop.nexuslayer.eu/api/agents \
+curl https://api.agentshop.nexuslayer.eu/api/agents \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}"
 ```
 
@@ -33,10 +33,10 @@ Agents run on machines **you** register, over SSH. Nothing executes on NexusLaye
 infrastructure.
 
 ```bash
-curl https://agentshop.nexuslayer.eu/api/machines \
+curl https://api.agentshop.nexuslayer.eu/api/machines \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}"
 
-curl -X POST https://agentshop.nexuslayer.eu/api/machines \
+curl -X POST https://api.agentshop.nexuslayer.eu/api/machines \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
   -H "Content-Type: application/json" \
   -d '{"name":"build-01","host":"10.0.0.9","user":"deploy"}'
@@ -46,7 +46,7 @@ curl -X POST https://agentshop.nexuslayer.eu/api/machines \
 
 ```bash
 # dispatch work to an agent on a machine
-curl -X POST https://agentshop.nexuslayer.eu/api/tasks \
+curl -X POST https://api.agentshop.nexuslayer.eu/api/tasks \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
   -H "Content-Type: application/json" \
   -d '{
@@ -57,7 +57,7 @@ curl -X POST https://agentshop.nexuslayer.eu/api/tasks \
   }'
 
 # poll status
-curl https://agentshop.nexuslayer.eu/api/tasks/{id} \
+curl https://api.agentshop.nexuslayer.eu/api/tasks/{id} \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}"
 ```
 
@@ -69,7 +69,7 @@ With GitHub configured under Settings, each task gets its own branch, commits an
 request automatically — you review the PR rather than the raw diff.
 
 ```bash
-curl https://agentshop.nexuslayer.eu/api/settings/github \
+curl https://api.agentshop.nexuslayer.eu/api/settings/github \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}"
 ```
 

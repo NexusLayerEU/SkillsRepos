@@ -13,7 +13,7 @@ description: >
 AgentVault stores encrypted secrets. Agents authenticate with short-lived vault tokens, request only the secrets they need, and every access is logged.
 
 **Dashboard:** https://vault.nexuslayer.eu  
-**API base:** https://vault.nexuslayer.eu  
+**API base:** https://api.agentvault.nexuslayer.eu  
 **Auth:** NexusLayer SSO JWT `Authorization: Bearer {{NEXUSLAYER_TOKEN}}`
 
 ---
@@ -21,7 +21,7 @@ AgentVault stores encrypted secrets. Agents authenticate with short-lived vault 
 ## List Secrets
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  https://vault.nexuslayer.eu/api/v1/secrets | python3 -m json.tool
+  https://api.agentvault.nexuslayer.eu/api/v1/secrets | python3 -m json.tool
 ```
 
 ## Create a Secret
@@ -35,7 +35,7 @@ curl -s -X POST \
     "value": "sk-the-actual-value",
     "description": "Optional description"
   }' \
-  https://vault.nexuslayer.eu/api/v1/secrets
+  https://api.agentvault.nexuslayer.eu/api/v1/secrets
 ```
 
 Secret types: `API_KEY`, `USERNAME_PASSWORD`, `SSH_KEY`, `CERTIFICATE`, `JSON`, `CONNECTION_STRING`
@@ -47,7 +47,7 @@ import urllib.request, json
 
 # Step 1: get a short-lived vault token
 token_req = urllib.request.Request(
-    "https://vault.nexuslayer.eu/vault/token",
+    "https://api.agentvault.nexuslayer.eu/vault/token",
     data=json.dumps({
         "agentId": "YOUR_AGENT_UUID",
         "agentSecret": "av_ag_YOUR_AGENT_SECRET"
@@ -58,7 +58,7 @@ vault_token = json.loads(urllib.request.urlopen(token_req).read())["token"]
 
 # Step 2: fetch the secret
 secret_req = urllib.request.Request(
-    "https://vault.nexuslayer.eu/vault/secrets/MY_API_KEY",
+    "https://api.agentvault.nexuslayer.eu/vault/secrets/MY_API_KEY",
     headers={"X-Vault-Token": vault_token}
 )
 value = json.loads(urllib.request.urlopen(secret_req).read())["value"]
@@ -71,7 +71,7 @@ curl -s -X POST \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
   -H "Content-Type: application/json" \
   -d '{"name": "my-agent", "description": "My automation agent"}' \
-  https://vault.nexuslayer.eu/api/v1/agents
+  https://api.agentvault.nexuslayer.eu/api/v1/agents
 ```
 Save the `agentSecret` from the response — it is shown **once only**.
 
@@ -81,7 +81,7 @@ curl -s -X POST \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
   -H "Content-Type: application/json" \
   -d '{"agentIdentityId": "AGENT_UUID", "secretId": "SECRET_UUID"}' \
-  https://vault.nexuslayer.eu/api/v1/policies
+  https://api.agentvault.nexuslayer.eu/api/v1/policies
 ```
 
 ## Python SDK

@@ -12,7 +12,7 @@ description: >
 AgentBrain is a three-layer memory system: working memory (24h TTL), episodic memory (permanent events), and lessons (hard-won rules promoted to permanent guidance).
 
 **Dashboard:** https://cortex.nexuslayer.eu  
-**API base:** https://cortex.nexuslayer.eu/api  
+**API base:** https://api.agentbrain.nexuslayer.eu/api  
 **Auth:** `Authorization: Bearer {{NEXUSLAYER_TOKEN}}`
 
 ---
@@ -49,7 +49,7 @@ The API base is `/api` — there is no `/api/v1`.
 ### Load context (episodes + lessons)
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  "https://cortex.nexuslayer.eu/api/context?q=PROJECT_NAME"
+  "https://api.agentbrain.nexuslayer.eu/api/context?q=PROJECT_NAME"
 ```
 
 ### Save an episode
@@ -58,7 +58,7 @@ curl -s -X POST \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
   -H "Content-Type: application/json" \
   -d '{"content":"What happened this session","tags":"project,session"}' \
-  https://cortex.nexuslayer.eu/api/memory/episodic
+  https://api.agentbrain.nexuslayer.eu/api/memory/episodic
 ```
 
 ### Save working memory (24h TTL)
@@ -67,19 +67,19 @@ curl -s -X POST \
   -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
   -H "Content-Type: application/json" \
   -d '{"content":"Short reminder","tags":"reminder"}' \
-  https://cortex.nexuslayer.eu/api/memory/working
+  https://api.agentbrain.nexuslayer.eu/api/memory/working
 ```
 
 ### List recent episodes
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  "https://cortex.nexuslayer.eu/api/memory/episodic?page=0&size=10"
+  "https://api.agentbrain.nexuslayer.eu/api/memory/episodic?page=0&size=10"
 ```
 
 ### List lessons
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  "https://cortex.nexuslayer.eu/api/lessons?status=ACCEPTED"
+  "https://api.agentbrain.nexuslayer.eu/api/lessons?status=ACCEPTED"
 ```
 
 A lesson's text is in `claim`, with the rule to apply in `rationale`.

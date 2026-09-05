@@ -12,7 +12,7 @@ description: >
 WatchGrid tracks every agent session: LLM calls, tool invocations, costs, errors, and run outcomes — in real time.
 
 **Dashboard:** https://watchgrid.nexuslayer.eu  
-**API base:** https://watchgrid.nexuslayer.eu/api/v1  
+**API base:** https://api.watchgrid.nexuslayer.eu/api/v1  
 **Ingest endpoint:** https://watchgrid.nexuslayer.eu/ingest/events  
 **Auth:** `Authorization: Bearer {{NEXUSLAYER_TOKEN}}`
 
@@ -21,13 +21,13 @@ WatchGrid tracks every agent session: LLM calls, tool invocations, costs, errors
 ## List Runs
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  https://watchgrid.nexuslayer.eu/api/v1/runs | python3 -m json.tool
+  https://api.watchgrid.nexuslayer.eu/api/v1/runs | python3 -m json.tool
 ```
 
 ## Get Run Details
 ```bash
 curl -s -H "Authorization: Bearer {{NEXUSLAYER_TOKEN}}" \
-  https://watchgrid.nexuslayer.eu/api/v1/runs/RUN_ID | python3 -m json.tool
+  https://api.watchgrid.nexuslayer.eu/api/v1/runs/RUN_ID | python3 -m json.tool
 ```
 
 ## Ingest Events (SDK key required)
